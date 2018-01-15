@@ -1,6 +1,5 @@
 // Averin Andrey
-include "code/MatrixClass"
-project(":code/MatrixClass").name = "ClassMatrix"
+
 
 // Bastrakova Ksenia
 include "code/merge-sort/Model"
