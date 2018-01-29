@@ -6,10 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MortgageCalculator {
+public final class MortgageCalculator {
 
-
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         JFrame frame = new JFrame("MortgageCalculator");
         frame.setContentPane(new MortgageCalculator(new ViewModel()).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,21 +63,13 @@ public class MortgageCalculator {
 
     private JPanel mainPanel;
     private JTextField setAmount;
-    private JLabel nameLabel;
     private JTextField setRate;
-    private JLabel labelPrice;
-    private JLabel procent;
     private JTextField setPeriod;
-    private JLabel data;
-    private JLabel typePrice;
     private JButton calculateButton;
     private JTextField textSum;
-    private JLabel labelSum;
-    private JComboBox cbPayment;
+    private JComboBox<ViewModel.PaymentType> cbPayment;
     private JLabel lbStatus;
-    private JLabel statusName;
     private JComboBox cbPeriodType;
     private JTextField txtPeriodNumber;
-    private JLabel lbPeriodNumber;
     private ViewModel viewModel;
 }

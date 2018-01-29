@@ -6,8 +6,8 @@ import ru.unn.agile.MortgageCalculator.Model.MortgageCalculator.PeriodType;
 public class ViewModel {
 
     public ViewModel() {
-        this.AmountOfCredit = "";
-        this.InterestRate = "";
+        this.amountOfCredit = "";
+        this.interestRate = "";
         this.period = "0";
         this.paymentType = PaymentType.Annuity;
         this.durationOfCredit = "Month";
@@ -16,20 +16,20 @@ public class ViewModel {
         periodNumber = 0;
     }
 
-    public void setAmountOfCredit(final String AmountOfCredit) {
-        if (!isNumbersInString(AmountOfCredit)) {
+    public void setAmountOfCredit(final String amountOfCredit) {
+        if (!isNumbersInString(amountOfCredit)) {
             status = Status.BAD_FORMAT;
             return;
         }
 
-        this.AmountOfCredit = AmountOfCredit;
+        this.amountOfCredit = amountOfCredit;
     }
 
-    public void setPeriodNumber(final String PeriodNumber) {
+    public void setPeriodNumber(final String periodNumber) {
         try {
-            int PeriodNumberInteger = Integer.parseInt(PeriodNumber);
-            if (PeriodNumberInteger > 0 && PeriodNumberInteger <= Integer.parseInt(period)) {
-                this.periodNumber = Integer.parseInt(PeriodNumber);
+            int periodNumberInteger = Integer.parseInt(periodNumber);
+            if (periodNumberInteger > 0 && periodNumberInteger <= Integer.parseInt(period)) {
+                this.periodNumber = Integer.parseInt(periodNumber);
             } else {
                 status = Status.BAD_FORMAT;
                 return;
@@ -40,13 +40,13 @@ public class ViewModel {
         }
     }
 
-    public void setInterestRate(final String InterestRate) {
-        if (!isNumbersInString(InterestRate)) {
+    public void setInterestRate(final String interestRate) {
+        if (!isNumbersInString(interestRate)) {
             status = Status.BAD_FORMAT;
             return;
         }
 
-        this.InterestRate = InterestRate;
+        this.interestRate = interestRate;
     }
 
     public void setDurationOfCredit(final String durationOfCredit) {
@@ -58,7 +58,7 @@ public class ViewModel {
     }
 
     public void setPeriod(final String period) {
-        if (!isNumbersInString(AmountOfCredit) || Integer.parseInt(period) <= 0) {
+        if (!isNumbersInString(amountOfCredit) || Integer.parseInt(period) <= 0) {
             status = Status.BAD_FORMAT;
             return;
         }
@@ -91,8 +91,8 @@ public class ViewModel {
             return;
         }
 
-        MortgageCalculator mortageCalculator = new MortgageCalculator(AmountOfCredit,
-                period, InterestRate);
+        MortgageCalculator mortageCalculator = new MortgageCalculator(amountOfCredit,
+                period, interestRate);
         int payment = 0;
 
         int indexPeriodNumber = periodNumber - 1;
@@ -133,15 +133,11 @@ public class ViewModel {
     }
 
     public boolean isDifferentiatedTypeStatusUpdate() {
-        if (paymentType == PaymentType.Differentiated) {
-            return true;
-        } else {
-            return false;
-        }
+        return (paymentType == PaymentType.Differentiated);
     }
 
-    private String AmountOfCredit;
-    private String InterestRate;
+    private String amountOfCredit;
+    private String interestRate;
     private String period;
     private String resultSum;
     private PaymentType paymentType;
@@ -156,11 +152,11 @@ public class ViewModel {
         }
 
         try {
-            if (!AmountOfCredit.isEmpty()) {
-                Float.parseFloat(AmountOfCredit);
+            if (!amountOfCredit.isEmpty()) {
+                Float.parseFloat(amountOfCredit);
             }
-            if (!InterestRate.isEmpty()) {
-                Float.parseFloat(InterestRate);
+            if (!interestRate.isEmpty()) {
+                Float.parseFloat(interestRate);
             }
             if (!period.isEmpty()) {
                 Integer.parseInt(period);
@@ -180,7 +176,7 @@ public class ViewModel {
     }
 
     private boolean isInputAvailable() {
-        return !AmountOfCredit.isEmpty() && !InterestRate.isEmpty() && !period.isEmpty();
+        return !amountOfCredit.isEmpty() && !interestRate.isEmpty() && !period.isEmpty();
     }
 
     private PeriodType getDurationOfCredit() {
@@ -193,11 +189,13 @@ public class ViewModel {
             case "Year":
                 periodType = PeriodType.year;
                 break;
+            default:
+                break;
         }
         return periodType;
     }
 
-    private boolean isNumbersInString(String line) {
+    private boolean isNumbersInString(final String line) {
         return line.matches("-?\\d+(\\.\\d+)?");
     }
 }
