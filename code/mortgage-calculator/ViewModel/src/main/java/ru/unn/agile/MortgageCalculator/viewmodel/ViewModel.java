@@ -26,15 +26,10 @@ public class ViewModel {
     }
 
     public void setPeriodNumber(final String periodNumber) {
-        try {
-            int periodNumberInteger = Integer.parseInt(periodNumber);
-            if (periodNumberInteger > 0 && periodNumberInteger <= Integer.parseInt(period)) {
-                this.periodNumber = Integer.parseInt(periodNumber);
-            } else {
-                status = Status.BAD_FORMAT;
-                return;
-            }
-        } catch (Exception IllegalArgumentException) {
+        int periodNumberInteger = Integer.parseInt(periodNumber);
+        if (periodNumberInteger > 0 && periodNumberInteger <= Integer.parseInt(period)) {
+            this.periodNumber = Integer.parseInt(periodNumber);
+        } else {
             status = Status.BAD_FORMAT;
             return;
         }
@@ -70,16 +65,8 @@ public class ViewModel {
         return resultSum;
     }
 
-    public String getAmountOfCredit() {
-        return this.period;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public String getPeriodNumber() {
-        return Integer.toString(periodNumber);
     }
 
     public void processTextChanged() {
@@ -93,10 +80,9 @@ public class ViewModel {
 
         MortgageCalculator mortageCalculator = new MortgageCalculator(amountOfCredit,
                 period, interestRate);
-        int payment = 0;
 
         int indexPeriodNumber = periodNumber - 1;
-        payment = mortageCalculator.getPayments(paymentType.toString(),
+        int payment = mortageCalculator.getPayments(paymentType.toString(),
                 indexPeriodNumber, getDurationOfCredit());
 
         if (payment != 0) {
