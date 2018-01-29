@@ -16,6 +16,13 @@ public class MortgageCalculator {
         payments = new ArrayList<Integer>();
     }
 
+    public MortgageCalculator(final String amount, final String period, final String rate) {
+        this.amount = Float.parseFloat(amount);
+        this.period = Integer.parseInt(period);
+        this.rate = Float.parseFloat(rate);
+        payments = new ArrayList<Integer>();
+    }
+
     public List<Integer> differentiatedPayment(final PeriodType paymentPeriod) {
         int periodNumber = 0;
         float amountT = amount;
