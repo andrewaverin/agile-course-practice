@@ -6,41 +6,25 @@ import ru.unn.agile.MortgageCalculator.Model.MortgageCalculator.PeriodType;
 public class ViewModel {
 
     public ViewModel() {
-        this.amountOfCredit = "";
-        this.interestRate = "";
+        this.amountOfCredit = "0.0";
+        this.interestRate = "0.0";
         this.period = "0";
         this.paymentType = PaymentType.Annuity;
         this.durationOfCredit = "Month";
         this.resultSum = "";
         this.status = Status.WAITING;
-        periodNumber = 0;
+        periodNumber = "0";
     }
 
     public void setAmountOfCredit(final String amountOfCredit) {
-        if (!isNumbersInString(amountOfCredit)) {
-            status = Status.BAD_FORMAT;
-            return;
-        }
-
         this.amountOfCredit = amountOfCredit;
     }
 
     public void setPeriodNumber(final String periodNumber) {
-        int periodNumberInteger = Integer.parseInt(periodNumber);
-        if (periodNumberInteger > 0 && periodNumberInteger <= Integer.parseInt(period)) {
-            this.periodNumber = Integer.parseInt(periodNumber);
-        } else {
-            status = Status.BAD_FORMAT;
-            return;
-        }
+        this.periodNumber = periodNumber;
     }
 
     public void setInterestRate(final String interestRate) {
-        if (!isNumbersInString(interestRate)) {
-            status = Status.BAD_FORMAT;
-            return;
-        }
-
         this.interestRate = interestRate;
     }
 
@@ -53,11 +37,6 @@ public class ViewModel {
     }
 
     public void setPeriod(final String period) {
-        if (!isNumbersInString(amountOfCredit) || Integer.parseInt(period) <= 0) {
-            status = Status.BAD_FORMAT;
-            return;
-        }
-
         this.period = period;
     }
 
@@ -73,6 +52,18 @@ public class ViewModel {
         parseInput();
     }
 
+    private boolean isCorrectPeriodNumber() {
+        if (!isNumbersInString(periodNumber)) {
+            return false;
+        } else {
+            int periodNumberInteger = Integer.parseInt(periodNumber);
+            if (periodNumberInteger <= 0 || periodNumberInteger > Integer.parseInt(period)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void calculate() {
         if (!parseInput()) {
             return;
@@ -81,7 +72,7 @@ public class ViewModel {
         MortgageCalculator mortageCalculator = new MortgageCalculator(amountOfCredit,
                 period, interestRate);
 
-        int indexPeriodNumber = periodNumber - 1;
+        int indexPeriodNumber = Integer.parseInt(periodNumber) - 1;
         int payment = mortageCalculator.getPayments(paymentType.toString(),
                 indexPeriodNumber, getDurationOfCredit());
 
@@ -91,7 +82,6 @@ public class ViewModel {
         } else {
             status = Status.BAD_FORMAT;
         }
-        this.resultSum = Integer.toString(payment);
     }
 
     public final class Status {
@@ -129,10 +119,15 @@ public class ViewModel {
     private PaymentType paymentType;
     private String status;
     private String durationOfCredit;
-    private int periodNumber;
+    private String periodNumber;
 
     private boolean parseInput() {
-        if (Integer.parseInt(period) <= 0) {
+        if (!isCorrectData()) {
+            status = Status.BAD_FORMAT;
+            return false;
+        }
+
+        if (isDifferentiatedTypeStatusUpdate() && !isCorrectPeriodNumber()) {
             status = Status.BAD_FORMAT;
             return false;
         }
@@ -179,6 +174,19 @@ public class ViewModel {
                 break;
         }
         return periodType;
+    }
+
+    private boolean isCorrectFloatValue(final String value) {
+        return (isNumbersInString(value) && Float.parseFloat(value) > 0.0f);
+    }
+
+    private boolean isCorrectIntValue(final String value) {
+        return (isNumbersInString(value) && Integer.parseInt(value) > 0.0f);
+    }
+
+    private boolean isCorrectData() {
+        return (isCorrectFloatValue(amountOfCredit) && isCorrectFloatValue(interestRate)
+                && isCorrectIntValue(period));
     }
 
     private boolean isNumbersInString(final String line) {

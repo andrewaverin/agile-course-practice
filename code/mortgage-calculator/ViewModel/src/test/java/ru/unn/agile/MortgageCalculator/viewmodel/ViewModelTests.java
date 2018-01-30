@@ -28,32 +28,36 @@ public class ViewModelTests {
     @Test
     public void canNotSetInterestRateValue() {
         viewModel.setInterestRate("de");
+        viewModel.processTextChanged();
         assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
     }
 
     @Test
-    public void canNotSetCreditTermValue() {
+    public void canNotSetInterestRateNegativeValue() {
+        viewModel.setInterestRate("-2");
+        viewModel.processTextChanged();
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
+    }
+
+    @Test
+    public void canNotSetCreditPeriodValue() {
         viewModel.setPeriod("ew");
+        viewModel.processTextChanged();
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
+    }
+
+    @Test
+    public void canNotSetAmountOfCreditNegativeValue() {
+        viewModel.setAmountOfCredit("-2");
+        viewModel.processTextChanged();
         assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
     }
 
     @Test
     public void canNotSetAmountOfCreditValue() {
         viewModel.setAmountOfCredit("a");
-        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
-    }
-
-    @Test
-    public void canSetAmountOfCreditValue() {
-        viewModel.setAmountOfCredit("1000");
-        assertEquals(Status.WAITING, viewModel.getStatus());
-    }
-
-    @Test
-    public void canSetCreditTermValue() {
-        fillInputFields();
         viewModel.processTextChanged();
-        assertEquals(Status.READY, viewModel.getStatus());
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
     }
 
     @Test
@@ -111,7 +115,17 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canNotCalculateAnnuityMortgagePerYear() {
+    public void canNotCalculateAnnuityMortgagePerYearWithEmptyValue() {
+        viewModel.setAmountOfCredit("");
+        viewModel.setInterestRate("");
+        viewModel.setPeriod("");
+        viewModel.setDurationOfCredit("Year");
+        viewModel.calculate();
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
+    }
+
+    @Test
+    public void canNotCalculateDifferentiatedMortgageWhenPeriodTypeIsZero() {
         viewModel.setAmountOfCredit("1000");
         viewModel.setInterestRate("0.05");
         viewModel.setPeriod("0");

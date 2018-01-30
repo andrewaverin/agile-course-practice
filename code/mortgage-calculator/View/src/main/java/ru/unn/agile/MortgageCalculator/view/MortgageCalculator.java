@@ -19,6 +19,7 @@ public final class MortgageCalculator {
     private MortgageCalculator(final ViewModel viewModel) {
         this.viewModel = viewModel;
 
+        initializationLabel();
         backBind();
 
         loadListOfPayments();
@@ -41,6 +42,14 @@ public final class MortgageCalculator {
                 txtPeriodNumber.setEnabled(viewModel.isDifferentiatedTypeStatusUpdate());
             }
         });
+
+        setAmount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent actionEvent) {
+                bind();
+                backBind();
+            }
+        });
     }
 
     private void loadListOfPayments() {
@@ -54,11 +63,25 @@ public final class MortgageCalculator {
         viewModel.setPeriod(setPeriod.getText());
 
         viewModel.setDurationOfCredit((String) cbPeriodType.getSelectedItem());
+        if (txtPeriodNumber.isEnabled()) {
+            viewModel.setPeriodNumber(txtPeriodNumber.getText());
+        }
     }
 
     private void backBind() {
         textSum.setText(viewModel.getResultSum());
         lbStatus.setText(viewModel.getStatus());
+    }
+
+    private void initializationLabel() {
+        nameLabel.setText("Mortage Calculator");
+        labelPrice.setText("Amount of credit");
+        procent.setText("Interest rate");
+        lbPeriodNumber.setText("PeriodNumber (for differented payment type)");
+        data.setText("Credit period");
+        typePrice.setText("Payment type");
+        labelSum.setText("Result");
+        statusName.setText("Status");
     }
 
     private JPanel mainPanel;
@@ -69,6 +92,14 @@ public final class MortgageCalculator {
     private JTextField textSum;
     private JComboBox<ViewModel.PaymentType> cbPayment;
     private JLabel lbStatus;
+    private JLabel nameLabel;
+    private JLabel labelPrice;
+    private JLabel procent;
+    private JLabel lbPeriodNumber;
+    private JLabel data;
+    private JLabel typePrice;
+    private JLabel labelSum;
+    private JLabel statusName;
     private JComboBox cbPeriodType;
     private JTextField txtPeriodNumber;
     private ViewModel viewModel;
