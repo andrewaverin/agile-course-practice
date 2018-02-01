@@ -1,6 +1,10 @@
 // Averin Andrey
-include "code/MatrixClass"
-project(":code/MatrixClass").name = "ClassMatrix"
+include "code/MatrixClass/Model"
+project(":code/MatrixClass/Model").name = "ClassMatrix"
+include "code/MatrixClass/View"
+project(":code/MatrixClass/View").name = "MatrixClass-View"
+include "code/MatrixClass/ViewModel"
+project(":code/MatrixClass/ViewModel").name = "MatrixClass-ViewModel"
 
 // Bastrakova Ksenia
 include "code/merge-sort/Model"
@@ -18,6 +22,8 @@ include "code/AssessmentsAccounting/View"
 project(":code/AssessmentsAccounting/View").name = "AssessmentsAccounting-View"
 include "code/AssessmentsAccounting/ViewModel"
 project(":code/AssessmentsAccounting/ViewModel").name = "AssessmentsAccounting-ViewModel"
+include "code/AssessmentsAccounting/Infrastructure"
+project(":code/AssessmentsAccounting/Infrastructure").name = "AssessmentsAccounting-Infrastructure"
 
 // Vershinina Olga
 include "code/DistanceBetweenVectors/Model"
@@ -60,12 +66,8 @@ include "code/converter-temperature/Infrastructure"
 project(":code/converter-temperature/Infrastructure").name = "converter-temperature-Infrastructure"
 
 // Gorbunova Natalia
-include "code/mortgage-calculator/Model"
-project(":code/mortgage-calculator/Model").name= "mortgage-calculator-Model"
-include "code/mortgage-calculator/View"
-project(":code/mortgage-calculator/View").name = "mortgage-calculator-View"
-include "code/mortgage-calculator/ViewModel"
-project(":code/mortgage-calculator/ViewModel").name = "mortgage-calculator-ViewModel"
+include "code/mortgage-calculator"
+project (":code/mortgage-calculator").name= "mortgage-calculator-Model"
 
 // Krivonosov Mikhail
 include "code/polynomial-calculator/Model"
@@ -157,13 +159,21 @@ include "code/vectors3d/View"
 project(":code/vectors3d/View").name = "vectors3d-View"
 
 
-// Semerenko Alexander
-include "code/Range"
-project(":code/Range").name = "Range-Model"
+// Semerenko Alexander 
+include "code/Range/Model" 
+project(":code/Range/Model").name = "Range-Model" 
+include "code/Range/ViewModel" 
+project(":code/Range/ViewModel").name = "Range-ViewModel" 
+include "code/Range/View" 
+project(":code/Range/View").name = "Range-View"
 
 // Semichev Uriy
-include "code/ratio-calculator"
-project(":code/ratio-calculator").name = "ratio-calculator"
+include "code/ratio-calculator/Model"
+project(":code/ratio-calculator/Model").name = "ratio-calculator-Model"
+include "code/ratio-calculator/View"
+project(":code/ratio-calculator/View").name = "ratio-calculator-View"
+include "code/ratio-calculator/ViewModel"
+project(":code/ratio-calculator/ViewModel").name = "ratio-calculator-ViewModel"
 
 // Tretyakova Olga
 include "code/convertnumeral/Model"
@@ -177,8 +187,12 @@ project(":code/convertnumeral/Infrastructure").name = "convertnumeral-Infrastruc
 
 
 // Uvarov Denis
-include "code/game-of-life"
-project(":code/game-of-life").name = "Game-of-life-Model"
+include "code/game-of-life/Model"
+project(":code/game-of-life/Model").name = "game-of-life-Model"
+include "code/game-of-life/View"
+project(":code/game-of-life/View").name = "game-of-life-View"
+include "code/game-of-life/ViewModel"
+project(":code/game-of-life/ViewModel").name = "game-of-life-ViewModel"
 
 // Umnikov Eugene
 include "code/Triangle/Model" 
@@ -207,6 +221,14 @@ project(":code/string-calculator/Infrastructure").name = "string-calculator-Infr
 // Bevzuk Anton
 include "code/bevzuk-anton"
 project(":code/bevzuk-anton").name = "bevzuk-anton-Model"
+
+// Gorbunova Natalya
+include "code/mortgage-calculator/Model"
+project(":code/mortgage-calculator/Model").name= "mortgage-calculator-Model"
+include "code/mortgage-calculator/View"
+project(":code/mortgage-calculator/View").name= "mortgage-calculator-View"
+include "code/mortgage-calculator/ViewModel"
+project(":code/mortgage-calculator/ViewModel").name= "mortgage-calculator-ViewModel"
 
 // Korniakov Kirill, lab1
 include "code/korniakov-kirill-lab1"
