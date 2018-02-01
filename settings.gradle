@@ -60,8 +60,12 @@ include "code/converter-temperature/Infrastructure"
 project(":code/converter-temperature/Infrastructure").name = "converter-temperature-Infrastructure"
 
 // Gorbunova Natalia
-include "code/mortgage-calculator"
-project (":code/mortgage-calculator").name= "mortgage-calculator-Model"
+include "code/mortgage-calculator/Model"
+project (":code/mortgage-calculator/Model").name= "mortgage-calculator-Model"
+include "code/mortgage-calculator/ViewModel"
+project (":code/mortgage-calculator/ViewModel").name= "mortgage-calculator-ViewModel"
+include "code/mortgage-calculator/View"
+project (":code/mortgage-calculator/View").name= "mortgage-calculator-View"
 
 // Krivonosov Mikhail
 include "code/polynomial-calculator/Model"
