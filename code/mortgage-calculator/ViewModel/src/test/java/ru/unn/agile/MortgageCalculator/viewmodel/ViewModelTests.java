@@ -41,10 +41,20 @@ public class ViewModelTests {
 
     @Test
     public void canNotSetCreditPeriodValue() {
+        viewModel.setAmountOfCredit("");
+        viewModel.setInterestRate("");
+        viewModel.setPeriod("");
+        viewModel.processTextChanged();
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
+    }
+
+    @Test
+    public void canNotSFillData() {
         viewModel.setPeriod("ew");
         viewModel.processTextChanged();
         assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
     }
+
 
     @Test
     public void canNotSetAmountOfCreditNegativeValue() {
@@ -129,6 +139,16 @@ public class ViewModelTests {
         viewModel.setAmountOfCredit("1000");
         viewModel.setInterestRate("0.05");
         viewModel.setPeriod("0");
+        viewModel.setDurationOfCredit("Year");
+        viewModel.calculate();
+        assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
+    }
+
+    @Test
+    public void canNotCalculateAnnuityMortgagePerMonthWithEmptyValue() {
+        viewModel.setAmountOfCredit("");
+        viewModel.setInterestRate("");
+        viewModel.setPeriod("");
         viewModel.setDurationOfCredit("Year");
         viewModel.calculate();
         assertEquals(Status.BAD_FORMAT, viewModel.getStatus());
