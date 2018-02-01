@@ -84,8 +84,14 @@ project(":code/polynomial-calculator/Infrastructure").name = "polynomial-calcula
 
 
 // Kuldaev Alexander
-include "code/salary"
-project(":code/salary").name = "kuldaev-aleksandr-lab1"
+include "code/salary/Model"
+project(":code/salary/Model").name = "salary-model"
+include "code/salary/ViewModel"
+project(":code/salary/ViewModel").name = "salary-ViewModel"
+include "code/salary/View"
+project(":code/salary/View").name = "salary-View"
+include "code/salary/Infrastructure"
+project(":code/salary/Infrastructure").name = "salary-Infrastructure"
 
 
 
