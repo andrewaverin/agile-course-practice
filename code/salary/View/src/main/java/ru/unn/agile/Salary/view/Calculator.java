@@ -56,3 +56,4 @@ public class Calculator {
     @FXML
     private Button btnCalc;
 }
+
