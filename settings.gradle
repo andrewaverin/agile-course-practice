@@ -6,7 +6,6 @@ project(":code/MatrixClass/View").name = "MatrixClass-View"
 include "code/MatrixClass/ViewModel"
 project(":code/MatrixClass/ViewModel").name = "MatrixClass-ViewModel"
 
-
 // Bastrakova Ksenia
 include "code/merge-sort/Model"
 project(":code/merge-sort/Model").name = "merge-sort-Model"
