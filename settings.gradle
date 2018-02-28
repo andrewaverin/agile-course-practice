@@ -1,10 +1,4 @@
 // Averin Andrey
-include "code/MatrixClass/Model"
-project(":code/MatrixClass/Model").name = "ClassMatrix"
-include "code/MatrixClass/View"
-project(":code/MatrixClass/View").name = "MatrixClass-View"
-include "code/MatrixClass/ViewModel"
-project(":code/MatrixClass/ViewModel").name = "MatrixClass-ViewModel"
 
 // Bastrakova Ksenia
 include "code/merge-sort/Model"
