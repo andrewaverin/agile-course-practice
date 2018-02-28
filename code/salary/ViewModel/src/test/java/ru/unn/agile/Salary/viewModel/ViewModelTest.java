@@ -238,6 +238,20 @@ public class ViewModelTest {
         assertTrue(viewModel.getLog().isEmpty());
     }
 
+    @Test
+    public void isCalculationEnabledBeforeInit() {
+        ViewModel TestViewModel = new ViewModel();
+        assertTrue(TestViewModel.isCalculationDisabled());
+    }
+
+    @Test
+    public void isCorrectResult() {
+        setInputData();
+        viewModel.calculate();
+
+        assertEquals("69.6", viewModel.getResult());
+    }
+
     private void setInputData() {
         viewModel.payProperty().set("10");
         viewModel.workProperty().set("5");
