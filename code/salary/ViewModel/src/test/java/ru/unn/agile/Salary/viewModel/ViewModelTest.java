@@ -240,8 +240,8 @@ public class ViewModelTest {
 
     @Test
     public void isCalculationEnabledBeforeInit() {
-        ViewModel TestViewModel = new ViewModel();
-        assertTrue(TestViewModel.isCalculationDisabled());
+        ViewModel testViewModel = new ViewModel();
+        assertTrue(testViewModel.isCalculationDisabled());
     }
 
     @Test
