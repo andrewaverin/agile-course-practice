@@ -208,6 +208,29 @@ public class ViewModelTest {
                 + viewModel.overProperty().get() + "; "
                 + viewModel.adminProperty().get() + "\\]"));
     }
+    
+    @Test
+    public void isStatusSUCCESS() {
+        setInputData();
+        viewModel.calculate();
+
+        assertEquals("Success!", viewModel.getStatus());
+    }
+    
+    @Test
+    public void isLogsNotEmptyBeforeCalculate() {
+        setInputData();
+        viewModel.calculate();
+
+        assertTrue(viewModel.getLogs() != null);
+    }
+    
+    @Test
+    public void isStatusReady() {
+        setInputData();
+
+        assertEquals("Press 'Calculate' or Enter!", viewModel.getStatus());
+    }
 
     @Test
     public void calculateIsNotCalledWhenButtonIsDisabled() {
