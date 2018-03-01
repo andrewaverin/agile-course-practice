@@ -30,7 +30,7 @@ public class TxtLogger implements ILogger {
         try {
             logBufWriter = new BufferedWriter(new FileWriter(this.nameFile));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Name of file can't be null or empty!");
         }
         wrBuffer = logBufWriter;
     }
