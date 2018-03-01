@@ -1,8 +1,10 @@
 package ru.unn.agile.Salary.infrastructure;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.fail;
+import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,6 +14,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.unn.agile.Salary.infrastructure.RegexMatcher.matchesPattern;
+import static junit.framework.TestCase.assertNull;
 
 public class TxtLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
@@ -34,6 +37,20 @@ public class TxtLoggerTests {
         } catch (FileNotFoundException e) {
             fail("File " + FILENAME + " wasn't found!");
         }
+    }
+
+    @Test
+    public void canNotLoggerBeCreatedWithEmpty() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Name of file can't be null or empty!");
+        assertNull(new TxtLogger(""));
+    }
+
+    @Test
+    public void canNotLoggerBeCreatedWithNullArgument() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Name of file can't be null or empty!");
+        assertNull(new TxtLogger(null));
     }
 
     @Test
