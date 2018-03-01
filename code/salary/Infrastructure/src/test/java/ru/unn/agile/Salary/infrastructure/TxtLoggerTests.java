@@ -17,8 +17,8 @@ import static ru.unn.agile.Salary.infrastructure.RegexMatcher.matchesPattern;
 import static junit.framework.TestCase.assertNull;
 
 public class TxtLoggerTests {
-    private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
-    private TxtLogger txtLogger;
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
     @Before
     public void setUp() {
@@ -85,4 +85,7 @@ public class TxtLoggerTests {
         String message = txtLogger.getLog().get(0);
         assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
+
+    private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
+    private TxtLogger txtLogger;
 }
