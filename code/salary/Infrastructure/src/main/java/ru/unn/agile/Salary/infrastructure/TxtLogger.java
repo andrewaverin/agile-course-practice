@@ -24,13 +24,17 @@ public class TxtLogger implements ILogger {
     }
 
     public TxtLogger(final String nameFile) {
+        if (nameFile == null || nameFile.isEmpty()) {
+            throw new IllegalArgumentException("Name of file can't be null or empty!");
+        }
+
         this.nameFile = nameFile;
 
         BufferedWriter logBufWriter = null;
         try {
             logBufWriter = new BufferedWriter(new FileWriter(this.nameFile));
         } catch (Exception e) {
-            throw new IllegalArgumentException("Name of file can't be null or empty!");
+            e.printStackTrace();
         }
         wrBuffer = logBufWriter;
     }
